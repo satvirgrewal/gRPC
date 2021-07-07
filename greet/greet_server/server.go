@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"gRPC/greet/greetpb"
 	"log"
@@ -10,6 +11,14 @@ import (
 )
 
 type server struct{}
+
+func (*server) Greet(ctx context.Context, req *greetpb.GreetRequest) (*greetpb.GreetResponse, error) {
+	fmt.Printf("Greet was invoked with greeting, %v", req.GetGreeting())
+	firstName := req.GetGreeting().GetFirstName()
+	result := fmt.Sprintf("Hello, %s", firstName)
+	resp := &greetpb.GreetResponse{Result: result}
+	return resp, nil
+}
 
 func main() {
 	fmt.Println("Hello World")
