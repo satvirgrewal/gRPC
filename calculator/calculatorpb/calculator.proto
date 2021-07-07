@@ -1,0 +1,18 @@
+syntax ="proto3";
+package calculator;
+option go_package="calculator/calculatorpb";
+
+
+message AdditionRequest{
+    float first_number = 1;
+    float second_number=2;
+}
+
+message AdditionResponse{
+    float sum = 1;
+}
+
+service Calculator{
+    // Unary
+    rpc AddTwoNumbers(AdditionRequest) returns (AdditionResponse){}
+}
